@@ -15,8 +15,6 @@ server_url = "https://api.upbit.com";
 
 @app1.route('/get', methods = ['GET', 'POST'])
 def index():
-    strs = []
-    currencies = []
     get_currencies()
     return jsonify({ 'currencies' : currencies,
     'amount' : strs})
@@ -39,6 +37,8 @@ def get_currencies():
     for i in balances:
         amount = upbit.get_amount(i['currency']);
         if(amount > 0):
+            currencies = []
+            strs = []
             currencies.append(i['currency'])
             strs.append(amount)
 

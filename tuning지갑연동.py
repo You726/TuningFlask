@@ -18,6 +18,7 @@ def index():
     strs = []
     currencies = []
     get_currencies()
+    print("aa")
     return jsonify({ 'currencies' : currencies,
     'amount' : strs})
 

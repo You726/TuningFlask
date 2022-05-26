@@ -15,9 +15,12 @@ server_url = "https://api.upbit.com";
 
 @app1.route('/get', methods = ['GET', 'POST'])
 def index():
-    get_currencies()
     return jsonify({ 'currencies' : currencies,
     'amount' : strs})
+
+@app1.route('/add', methods = ['GET', 'POST'])
+def index():
+    get_currencies()
 
 @app1.route('/read', methods=['POST'])
 def inde():

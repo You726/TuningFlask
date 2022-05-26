@@ -13,12 +13,9 @@ access_key = "KlxjvWx33PG1cSY4BIf8fRW9WbpACAa03bS95qZg";
 secret_key = "nYQ6L4o6Bz2Jl09kDGy6FUmoBstHXS7WaGuwx0T5";
 server_url = "https://api.upbit.com";
 
-@app1.route('/', methods = ['GET', 'POST'])
+@app1.route('/get', methods = ['GET', 'POST'])
 def index():
-    strs = []
-    currencies = []
     get_currencies()
-    print("aa")
     return jsonify({ 'currencies' : currencies,
     'amount' : strs})
 

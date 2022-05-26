@@ -21,7 +21,7 @@ def a():
 @app1.route('/add', methods = ['GET'])
 def b():
     get_currencies()
-
+    
 @app1.route('/read', methods=['POST'])
 def c():
     access_key = request.form['accessKey']

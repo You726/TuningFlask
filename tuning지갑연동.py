@@ -14,16 +14,16 @@ secret_key = "nYQ6L4o6Bz2Jl09kDGy6FUmoBstHXS7WaGuwx0T5";
 server_url = "https://api.upbit.com";
 
 @app1.route('/get', methods = ['GET', 'POST'])
-def index():
+def a():
     return jsonify({ 'currencies' : currencies,
     'amount' : strs})
 
-@app1.route('/add', methods = ['GET', 'POST'])
-def index():
+@app1.route('/add', methods = ['GET'])
+def b():
     get_currencies()
 
 @app1.route('/read', methods=['POST'])
-def inde():
+def c():
     access_key = request.form['accessKey']
     secret_key = request.form['secretKey']
     print(access_key + secret_key)

@@ -52,4 +52,4 @@ def get_currency_amount(cname):
 
 
 if __name__ == '__main__':
-    app1.run(host='192.168.35.163', debug=True)
+    app1.run(debug=True)

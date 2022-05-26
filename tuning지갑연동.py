@@ -15,6 +15,8 @@ server_url = "https://api.upbit.com";
 
 @app1.route('/get', methods = ['GET', 'POST'])
 def index():
+    strs = []
+    currencies = []
     get_currencies()
     return jsonify({ 'currencies' : currencies,
     'amount' : strs})

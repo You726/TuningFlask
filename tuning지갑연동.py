@@ -9,8 +9,8 @@ app1 = Flask(__name__)
 strs = []
 currencies = []
 
-access_key = os.environ['UPBIT_OPEN_API_ACCESS_KEY']
-secret_key = os.environ['UPBIT_OPEN_API_SECRET_KEY']
+access_key = "User access key";
+secret_key = "User access key";
 server_url = "https://api.upbit.com";
 
 @app1.route('/', methods = ['GET', 'POST'])

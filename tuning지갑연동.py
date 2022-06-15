@@ -29,12 +29,9 @@ def c():
     print(access_key + secret_key)
     return access_key + secret_key
 
-
-
 upbit = pyupbit.Upbit(access_key, secret_key)
 
 balances = upbit.get_balances()
-
 
 def get_currencies():  
     for i in balances:
@@ -49,8 +46,6 @@ def get_currency_amount(cname):
         if(i['currency'] == cname):
             upbit.get_amount(i['currency']);
     return am;
-
-
 
 if __name__ == '__main__':
     app1.run(host='0.0.0.0', port=5000, debug=True)

@@ -14,8 +14,8 @@ strs = []
 currencies = []
 puid = "";
 
-access_key = "KlxjvWx33PG1cSY4BIf8fRW9WbpACAa03bS95qZg";
-secret_key = "nYQ6L4o6Bz2Jl09kDGy6FUmoBstHXS7WaGuwx0T5";
+access_key = "aaaaaaaaaaaacSY4BIf8fRW9WbpACAa03bS95qZg";
+secret_key = "aaaaaaaaaaaal09kDGy6FUmoBstHXS7WaGuwx0T5";
 server_url = "https://api.upbit.com";
 
 project_url = "https://console.firebase.google.com/project/tuning-9b90e/firestore/";
@@ -25,12 +25,12 @@ firebase_admin.initialize_app(cred, {
 })
 
 
-@app1.route('/get', methods = ['GET', 'POST'])
-def a():
-    return jsonify({
-    'uid' : puid,
-    'currencies' : currencies,
-    'amount' : strs})
+# @app1.route('/get', methods = ['GET', 'POST'])
+# def a():
+#     return jsonify({
+#     'uid' : puid,
+#     'currencies' : currencies,
+#     'amount' : strs})
 
 @app1.route('/add', methods = ['GET'])
 def b():

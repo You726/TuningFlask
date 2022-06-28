@@ -19,7 +19,7 @@ secret_key = "aYQ6L4o6Bz2Jl09kDGy6FUmoBstHXS7WaGuwx0T5";
 server_url = "https://api.upbit.com";
 
 project_url = "https://console.firebase.google.com/project/tuning-9b90e/firestore/";
-cred = credentials.Certificate("/home/ubuntu/TuningFlask/tuning-9b90e-firebase-adminsdk-cakmk-1015e5df95.json")
+cred = credentials.Certificate("/home/ubuntu/tuning-9b90e-firebase-adminsdk-cakmk-1015e5df95.json")
 firebase_admin.initialize_app(cred, {
   'projectId': 'tuning-9b90e',
 })

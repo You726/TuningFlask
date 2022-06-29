@@ -1,6 +1,8 @@
 import os
 import pyupbit
 
+import json
+
 from flask import Flask, jsonify
 from flask import request
 
@@ -24,9 +26,6 @@ firebase_admin.initialize_app(cred, {
   'projectId': 'tuning-9b90e',
 })
 
-
-
-
 @app1.route('/get', methods = ['GET', 'POST'])
 def a():
     return jsonify({
@@ -48,10 +47,12 @@ def b():
     
 @app1.route('/read', methods=['POST'])
 def c():
-    access_key = request.form['accessKey']
-    secret_key = request.form['secretKey']
-    puid = request.form['uid']
-    print(access_key + secret_key)
+    global access_key, secret_key, puid
+    request_data = request.date
+    request_data = json.loads(request_data.decode('utf-8'))
+    access_key = request_data['accessKey']
+    secret_key = request_data['secretKey']
+    puid = request_data['uid']
     return access_key + secret_key + puid
 
 upbit = pyupbit.Upbit(access_key, secret_key)

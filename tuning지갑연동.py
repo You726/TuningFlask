@@ -24,7 +24,6 @@ firebase_admin.initialize_app(cred, {
   'projectId': 'tuning-9b90e',
 })
 
-
 # @app1.route('/get', methods = ['GET', 'POST'])
 # def a():
 #     return jsonify({
@@ -49,7 +48,6 @@ def c():
     access_key = request.form['accessKey']
     secret_key = request.form['secretKey']
     puid = request.form['uid']
-    print(access_key + secret_key)
     return access_key + secret_key + puid
 
 upbit = pyupbit.Upbit(access_key, secret_key)

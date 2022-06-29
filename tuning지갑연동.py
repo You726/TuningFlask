@@ -33,6 +33,16 @@ firebase_admin.initialize_app(cred, {
 #     'currencies' : currencies,
 #     'amount' : strs})
 
+@app1.route('/read', methods=['POST'])
+def c():
+    global access_key, secret_key, puid
+    request_data = request.data
+    request_data = json.loads(request_data.decode('utf-8'))
+    access_key = request_data['accessKey']
+    secret_key = request_data['secretKey']
+    puid = request_data['uid']
+    return access_key + secret_key + puid
+    
 @app1.route('/add', methods = ['GET'])
 def b():
     get_currencies()
@@ -45,15 +55,6 @@ def b():
         u'uid': puid
     })
     
-@app1.route('/read', methods=['POST'])
-def c():
-    global access_key, secret_key, puid
-    request_data = request.data
-    request_data = json.loads(request_data.decode('utf-8'))
-    access_key = request_data['accessKey']
-    secret_key = request_data['secretKey']
-    puid = request_data['uid']
-    return access_key + secret_key + puid
 
 upbit = pyupbit.Upbit(access_key, secret_key)
 

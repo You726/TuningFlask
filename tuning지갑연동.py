@@ -1,5 +1,4 @@
 import os
-from turtle import pu
 import pyupbit
 
 import json

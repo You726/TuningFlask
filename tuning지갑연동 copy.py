@@ -39,7 +39,7 @@ def b():
     get_currencies()
     db = firestore.client()
 
-    doc_ref = db.collection(u'cryptoData').document(u'zzz')
+    doc_ref = db.collection(u'cryptoData').document(u'zz')
     doc_ref.set({
         u'currencies' : currencies,
         u'amount' : strs,

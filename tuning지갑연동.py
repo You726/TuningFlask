@@ -64,6 +64,7 @@ def b():
 
 def get_currencies():  
     for i in balances:
+        amount = 0;
         amount = upbit.get_amount(i['currency']);
         if(amount > 0):
             currencies.append(i['currency'])

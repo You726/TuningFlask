@@ -37,11 +37,14 @@ firebase_admin.initialize_app(cred, {
 def c():
     global access_key, secret_key, puid
     if(request.method == 'POST') :
-        request_data = request.data
-        request_data = json.loads(request_data.decode('utf-8'))
-        access_key = request_data['accessKey']
-        secret_key = request_data['secretKey']
-        puid = request_data['uid']
+        # request_data = request.data
+        # request_data = json.loads(request_data.decode('utf-8'))
+        access_key = request.form['accessKey']
+        secret_key = request.form['secretKey']
+        puid = request.form['uid']
+        # access_key = request_data['accessKey']
+        # secret_key = request_data['secretKey']
+        # puid = request_data['uid']
     #return access_key + secret_key + puid
 
 @app1.route('/add', methods = ['GET'])

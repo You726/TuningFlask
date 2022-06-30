@@ -39,9 +39,9 @@ def c():
     if(request.method == 'POST') :
         # request_data = request.data
         # request_data = json.loads(request_data.decode('utf-8'))
-        access_key = request.form['accessKey']
-        secret_key = request.form['secretKey']
-        puid = request.form['uid']
+        access_key = request.form['accessKey'].encode('utf-8')
+        secret_key = request.form['secretKey'].encode('utf-8')
+        puid = request.form['uid'].encode('utf-8')
         # access_key = request_data['accessKey']
         # secret_key = request_data['secretKey']
         # puid = request_data['uid']

@@ -45,6 +45,8 @@ def c():
         access_key = request_data['accessKey']
         secret_key = request_data['secretKey']
         puid = request_data['uid']
+    
+    return "";
     #return access_key + secret_key + puid
 
 @app1.route('/add', methods = ['GET'])

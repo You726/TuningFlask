@@ -59,12 +59,12 @@ def b():
         u'amount' : strs,
         u'uid': puid
     })
-    currencies = [];
-    strs = [];
     return "";
 
 
 def get_currencies():  
+    currencies = []
+    strs = []
     for i in balances:
         amount = 0;
         amount = upbit.get_amount(i['currency']);

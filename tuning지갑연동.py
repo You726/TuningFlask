@@ -59,7 +59,7 @@ def b():
         u'amount' : strs,
         u'uid': puid
     })
-    
+    return "";
 
 
 def get_currencies():  

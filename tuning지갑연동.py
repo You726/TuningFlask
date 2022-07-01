@@ -63,6 +63,7 @@ def b():
 
 
 def get_currencies():  
+    global currencies, strs
     currencies = []
     strs = []
     for i in balances:

@@ -59,6 +59,9 @@ def b():
         u'amount' : strs,
         u'uid': puid
     })
+    currencies = "";
+    strs = "";
+    puid = "";
     return "";
 
 

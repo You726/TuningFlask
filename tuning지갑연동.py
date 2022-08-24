@@ -70,7 +70,7 @@ def get_currencies():
             strs.append(amount)
 
 @app1.route('/tuning', methods=['POST', 'GET'])
-def c():
+def tuningstart():
     global upbit, balances, percents, p_length
     if(request.method == 'POST') :
         request_data = request.data

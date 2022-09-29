@@ -104,7 +104,7 @@ def reserve():
             print('%d , BUY : %0.0f' %(i, buyarr[i]))
             print('%d , NOW : %0.0f' %(i, sumarr[i]))
             #구매하기
-            buy_market(currencies, buyarr[i])
+            buy_market(currencies[i], buyarr[i])
         else:
             break
 

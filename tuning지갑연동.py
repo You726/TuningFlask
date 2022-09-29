@@ -49,10 +49,9 @@ def c():
 def b():    
     get_currencies()
     db = firestore.client()
-
     doc_ref = db.collection(u'cryptoData').document(u'tuning'+puid)
     doc_ref.set({
-        u'currencies' : currencies,
+        u'currencies' : currencies, 
         u'amount' : strs,
         u'uid': puid
     })
@@ -82,7 +81,7 @@ def tuningstart():
 def get_balance(ticker):
     balances = upbit.get_balances()
     for b in balances:
-        if b['currency'] == ticker:
+        if b['currency'] == ticker: 
             if b['balance'] is not None:
                 return int(b['balance'])
             else:
@@ -102,11 +101,13 @@ def tuning():
         for i in range(p_length):
             buy_amount[i] = havingmoney * percents[i] / 100.0
             print('having money : %0.0f' %crc_krw[i])
+            
             if crc_krw[i] > (buy_amount[i] + (buy_amount[i] * depth)) :
                 buyt = crc_krw[i] - buy_amount[i]
                 print('SELL : %0.0f' %buyt)
                 sumc = crc_krw[i] - buyt
                 print('NOW : %0.0f' %sumc)
+
             elif crc_krw[i] < (buy_amount[i] - (buy_amount[i] * depth)):
                 buyt = buy_amount[i] - crc_krw[i]
                 print('BUY : %0.0f' %buyt)

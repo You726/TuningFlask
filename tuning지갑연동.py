@@ -16,9 +16,9 @@ strs = []
 currencies = []
 
 #튜닝에 필요한 변수들
-percents = [60, 10, 10, 20]
-매수금액 = [10000, 60000, 10000, 20000]
-p_length = 4
+percents = [90, 10]
+매수금액 = [50000, 50000]
+p_length = 2
 
 총매수금액 = 100000.0
 depth = 0.15
@@ -65,7 +65,7 @@ def get_currencies():
     for i in balances:
         amount = 0;
         amount = upbit.get_amount(i['currency']);
-        if(amount > 0):
+        if(amount >= 1):
             currencies.append(i['currency'])
             strs.append(amount)
 

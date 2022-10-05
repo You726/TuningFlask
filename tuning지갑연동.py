@@ -17,10 +17,10 @@ currencies = []
 
 #튜닝에 필요한 변수들
 percents = [60, 10, 10, 20]
-crc_krw = [40000, 20000, 10000, 30000]
+매수금액 = [10000, 60000, 10000, 20000]
 p_length = 4
 
-havingmoney = 100000.0
+총매수금액 = 100000.0
 depth = 0.15
 
 server_url = "https://api.upbit.com";
@@ -49,9 +49,10 @@ def c():
 def b():    
     get_currencies()
     db = firestore.client()
+
     doc_ref = db.collection(u'cryptoData').document(u'tuning'+puid)
     doc_ref.set({
-        u'currencies' : currencies, 
+        u'currencies' : currencies,
         u'amount' : strs,
         u'uid': puid
     })
@@ -69,19 +70,20 @@ def get_currencies():
             strs.append(amount)
 
 @app1.route('/tuning', methods=['POST', 'GET'])
-def tuningstart():
+def c():
     global upbit, balances, percents, p_length
     if(request.method == 'POST') :
         request_data = request.data
         request_data = json.loads(request_data.decode('utf-8'))
         percents = request_data['percents']
         p_length = request_data['p_length']
+        tuning()
     return "";
 
 def get_balance(ticker):
     balances = upbit.get_balances()
     for b in balances:
-        if b['currency'] == ticker: 
+        if b['currency'] == ticker:
             if b['balance'] is not None:
                 return int(b['balance'])
             else:
@@ -94,30 +96,64 @@ def buy_market(ticker, price):
 def sell_market(ticker, price):
     upbit.sell_market_order(ticker=ticker, price=price*0.9995)
 
+def reserve():
+    global buyarr, sumarr, barr_count
+
+    for i in range(barr_count+1):
+        if buyarr[i] != None and sumarr[i] != None:
+            print('%d , BUY : %0.0f' %(i, buyarr[i]))
+            print('%d , NOW : %0.0f' %(i, sumarr[i]))
+            #구매하기
+            buy_market(currencies[i], buyarr[i])
+        else:
+            break
+
 def tuning():
-    global buy_amount, upbit
-    buy_amount = [0, 0, 0, 0]
+    global buy_amount, upbit, buyarr, sumarr, barr_count
+    buy_amount = [p_length]
+    buyarr = [p_length]
+    sumarr = [p_length]
+    barr_count = 0
     while(1):
         for i in range(p_length):
-            buy_amount[i] = havingmoney * percents[i] / 100.0
-            print('having money : %0.0f' %crc_krw[i])
-            
-            if crc_krw[i] > (buy_amount[i] + (buy_amount[i] * depth)) :
-                buyt = crc_krw[i] - buy_amount[i]
-                print('SELL : %0.0f' %buyt)
-                sumc = crc_krw[i] - buyt
-                print('NOW : %0.0f' %sumc)
+            buy_amount[i] = 총매수금액 * percents[i] / 100.0
+            print('having money : %0.0f' %매수금액[i])
 
-            elif crc_krw[i] < (buy_amount[i] - (buy_amount[i] * depth)):
-                buyt = buy_amount[i] - crc_krw[i]
-                print('BUY : %0.0f' %buyt)
-                sumc = crc_krw[i] + buyt
-                print('NOW : %0.0f' %sumc)
+            #코인 가치가 제한 폭 만큼 보다 더 클 때
+            if 매수금액[i] > (buy_amount[i] + (buy_amount[i] * depth)) :
+                for j in range(p_length):
+                    buy_amount[j] = 총매수금액 * percents[j] / 100.0
+                    if 매수금액[j] > buy_amount[j] :
+                        buyt = 매수금액[j] - buy_amount[j]
+                        print('%d , SELL : %0.0f' %(j, buyt))
+                        sumc = 매수금액[j] - buyt
+                        print('%d , NOW : %0.0f' %(j, sumc))
+                        sell_market(currencies[j], buyt)
+                    elif 매수금액[j] < buy_amount[j]:
+                        buyarr[barr_count] = buy_amount[j] - 매수금액[j]
+                        # print('%d , BUY : %0.0f' %(j, buyt))
+                        sumarr[barr_count] = 매수금액[j] + buyarr[barr_count]
+                        # print('%d , NOW : %0.0f' %(j, sumc))
+                    barr_count += 1
+                break;
 
-                #총매수금액
-                print(upbit.get_amount('ALL'))
-        # sleep(10)
-        break;
+            #코인 가치가 제한 폭 만큼 보다 더 작을 때
+            elif 매수금액[i] < (buy_amount[i] - (buy_amount[i] * depth)):
+                for j in range(p_length):
+                    buy_amount[j] = 총매수금액 * percents[j] / 100.0
+                    if 매수금액[j] > buy_amount[j] :
+                        buyt = 매수금액[j] - buy_amount[j]
+                        print('%d , SELL : %0.0f' %(j, buyt))
+                        sumc = 매수금액[j] - buyt
+                        print('%d , NOW : %0.0f' %(j, sumc))
+                        sell_market(currencies[j], buyt)
+                    elif 매수금액[j] < buy_amount[j]:
+                        buyarr[barr_count] = buy_amount[j] - 매수금액[j]
+                        # print('%d , BUY : %0.0f' %(j, buyt))
+                        sumarr[barr_count] = 매수금액[j] + buyarr[barr_count]
+                        # print('%d , NOW : %0.0f' %(j, sumc))
+                break;
+        reserve()
     return 0;
 
 if __name__ == '__main__':

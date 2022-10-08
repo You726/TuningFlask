@@ -69,13 +69,13 @@ def get_currencies():
     for i in balances:
         amount = 0;
         name = "KRW-"+i['currency']
-        print(name)
-        # amount = pyupbit.get_current_price(name) * upbit.get_balance(i['currency'])
-        amount = upbit.get_amount(i['currency'])
-        if(amount >= 1):
-            currencies.append(i['currency'])
-            strs.append(amount)
-            coin_amount.append(upbit.get_balance(i['currency']))
+        if i['currency'] != 'KRW':
+            amount = pyupbit.get_current_price(name) * upbit.get_balance(i['currency'])
+            amount = upbit.get_amount(i['currency'])
+            if(amount >= 1):
+                currencies.append(i['currency'])
+                strs.append(amount)
+                coin_amount.append(upbit.get_balance(i['currency']))
 
 @app1.route('/tuning', methods=['POST', 'GET'])
 def start_tune():

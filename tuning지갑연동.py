@@ -102,7 +102,8 @@ def buy_market(ticker, price):
     upbit.buy_market_order(ticker="KRW-"+ticker, price=price*0.9995)
 
 def sell_market(ticker, price):
-    upbit.sell_market_order(ticker="KRW-"+ticker, price=price*0.9995)
+    volume = (price * 0.9995)/upbit.get_balance(ticker=ticker)
+    upbit.sell_market_order(ticker="KRW-"+ticker, volume=volume)
 
 def reserve():
     global buyarr, sumarr, barr_count

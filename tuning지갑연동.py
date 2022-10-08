@@ -102,8 +102,8 @@ def buy_market(ticker, price):
     upbit.buy_market_order(ticker=ticker, price=price*0.9995)
 
 def sell_market(ticker, price):
-    volume = (price * 0.9995)/pyupbit.get_current_price(ticker)
-    print(pyupbit.get_current_price(ticker))
+    volume = (price * 0.9995)/pyupbit.get_current_price("KRW-"+ticker)
+    print(pyupbit.get_current_price("KRW-"+ticker))
     print(volume)
     upbit.sell_market_order(ticker=ticker, volume=volume)
 

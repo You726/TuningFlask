@@ -126,12 +126,12 @@ def tuning():
     while(3):
         for i in range(p_length):
             buy_amount[i] = buyset_sum * percents[i] / 100.0
+            print(buy_amount[i])
             print('having money : %0.0f' %buyset[i])
 
             #코인 가치가 제한 폭 만큼 보다 더 클 때
             if buyset[i] > (buy_amount[i] + (buy_amount[i] * depth)) :
                 for j in range(p_length):
-                    buy_amount = [p_length]
                     buy_amount[j] = buyset_sum * percents[j] / 100.0
                     if buyset[j] > buy_amount[j] :
                         buyt = buyset[j] - buy_amount[j]
@@ -151,7 +151,6 @@ def tuning():
             #코인 가치가 제한 폭 만큼 보다 더 작을 때
             elif buyset[i] < (buy_amount[i] - (buy_amount[i] * depth)):
                 for j in range(p_length):
-                    buy_amount = [p_length]
                     buy_amount[j] = buyset_sum * percents[j] / 100.0
                     if buyset[j] > buy_amount[j] :
                         buyt = buyset[j] - buy_amount[j]

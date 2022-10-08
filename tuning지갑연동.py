@@ -123,7 +123,7 @@ def tuning():
     buyarr = [p_length]
     sumarr = [p_length]
     barr_count = 0
-    while(1):
+    while(3):
         for i in range(p_length):
             buy_amount[i] = buyset_sum * percents[i] / 100.0
             print('having money : %0.0f' %buyset[i])

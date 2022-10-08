@@ -14,13 +14,14 @@ from firebase_admin import db
 app1 = Flask(__name__)
 strs = []
 currencies = []
+coin_amount = []
 
 #튜닝에 필요한 변수들
 percents = [90, 10]
-매수금액 = [50000, 50000]
+buyset = [50000, 50000]
 p_length = 2
 
-총매수금액 = 100000.0
+buyset_sum = 100000.0
 depth = 0.15
 
 server_url = "https://api.upbit.com";
@@ -54,29 +55,34 @@ def b():
     doc_ref.set({
         u'currencies' : currencies,
         u'amount' : strs,
+        u'coin_amount' : coin_amount,
         u'uid': puid
     })
     return "";
 
 def get_currencies():  
-    global currencies, strs
+    global currencies, strs, coin_amount
     currencies = []
     strs = []
+    coin_amount = []
+
     for i in balances:
         amount = 0;
-        amount = upbit.get_amount(i['currency']);
+        amount = upbit.get_amount(i['currency'])
         if(amount >= 1):
             currencies.append(i['currency'])
             strs.append(amount)
+            coin_amount.append(upbit.get_balance(i['currency']))
 
 @app1.route('/tuning', methods=['POST', 'GET'])
 def start_tune():
-    global upbit, balances, percents, p_length
+    global upbit, balances, percents, p_length, depth
     if(request.method == 'POST') :
         request_data = request.data
         request_data = json.loads(request_data.decode('utf-8'))
         percents = request_data['percents']
         p_length = request_data['p_length']
+        depth = request_data['depth']
         tuning()
     return "";
 
@@ -116,41 +122,41 @@ def tuning():
     barr_count = 0
     while(1):
         for i in range(p_length):
-            buy_amount[i] = 총매수금액 * percents[i] / 100.0
-            print('having money : %0.0f' %매수금액[i])
+            buy_amount[i] = buyset_sum * percents[i] / 100.0
+            print('having money : %0.0f' %buyset[i])
 
             #코인 가치가 제한 폭 만큼 보다 더 클 때
-            if 매수금액[i] > (buy_amount[i] + (buy_amount[i] * depth)) :
+            if buyset[i] > (buy_amount[i] + (buy_amount[i] * depth)) :
                 for j in range(p_length):
-                    buy_amount[j] = 총매수금액 * percents[j] / 100.0
-                    if 매수금액[j] > buy_amount[j] :
-                        buyt = 매수금액[j] - buy_amount[j]
+                    buy_amount[j] = buyset_sum * percents[j] / 100.0
+                    if buyset[j] > buy_amount[j] :
+                        buyt = buyset[j] - buy_amount[j]
                         print('%d , SELL : %0.0f' %(j, buyt))
-                        sumc = 매수금액[j] - buyt
+                        sumc = buyset[j] - buyt
                         print('%d , NOW : %0.0f' %(j, sumc))
                         sell_market(currencies[j], buyt)
-                    elif 매수금액[j] < buy_amount[j]:
-                        buyarr[barr_count] = buy_amount[j] - 매수금액[j]
+                    elif buyset[j] < buy_amount[j]:
+                        buyarr[barr_count] = buy_amount[j] - buyset[j]
                         # print('%d , BUY : %0.0f' %(j, buyt))
-                        sumarr[barr_count] = 매수금액[j] + buyarr[barr_count]
+                        sumarr[barr_count] = buyset[j] + buyarr[barr_count]
                         # print('%d , NOW : %0.0f' %(j, sumc))
                     barr_count += 1
                 break;
 
             #코인 가치가 제한 폭 만큼 보다 더 작을 때
-            elif 매수금액[i] < (buy_amount[i] - (buy_amount[i] * depth)):
+            elif buyset[i] < (buy_amount[i] - (buy_amount[i] * depth)):
                 for j in range(p_length):
-                    buy_amount[j] = 총매수금액 * percents[j] / 100.0
-                    if 매수금액[j] > buy_amount[j] :
-                        buyt = 매수금액[j] - buy_amount[j]
+                    buy_amount[j] = buyset_sum * percents[j] / 100.0
+                    if buyset[j] > buy_amount[j] :
+                        buyt = buyset[j] - buy_amount[j]
                         print('%d , SELL : %0.0f' %(j, buyt))
-                        sumc = 매수금액[j] - buyt
+                        sumc = buyset[j] - buyt
                         print('%d , NOW : %0.0f' %(j, sumc))
                         sell_market(currencies[j], buyt)
-                    elif 매수금액[j] < buy_amount[j]:
-                        buyarr[barr_count] = buy_amount[j] - 매수금액[j]
+                    elif buyset[j] < buy_amount[j]:
+                        buyarr[barr_count] = buy_amount[j] - buyset[j]
                         # print('%d , BUY : %0.0f' %(j, buyt))
-                        sumarr[barr_count] = 매수금액[j] + buyarr[barr_count]
+                        sumarr[barr_count] = buyset[j] + buyarr[barr_count]
                         # print('%d , NOW : %0.0f' %(j, sumc))
                 break;
         reserve()

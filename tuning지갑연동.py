@@ -119,7 +119,6 @@ def reserve():
 def tuning():
     global buy_amount, upbit, buyarr, sumarr, barr_count, percents
     buy_amount = [0] * p_length
-    percents = [0] * p_length
     buyarr = [0] * p_length
     sumarr = [0] * p_length
     barr_count = 0

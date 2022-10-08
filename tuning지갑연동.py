@@ -112,7 +112,7 @@ def reserve():
             print('%d , BUY : %0.0f' %(i, buyarr[i]))
             print('%d , NOW : %0.0f' %(i, sumarr[i]))
             #구매하기
-            # buy_market(currencies[i], buyarr[i])
+            buy_market(currencies[i], buyarr[i])
         else:
             break
 
@@ -139,10 +139,7 @@ def tuning():
                         print('%d , SELL : %0.0f' %(j, buyt))
                         sumc = buyset[j] - buyt
                         print('%d , NOW : %0.0f' %(j, sumc))
-                        
-                        print('CHECK J1: %d' %j)
-                        print('CHECK: %s' %currencies[j])
-                        # sell_market(currencies[j], buyt)
+                        sell_market(currencies[j], buyt)
                     elif buyset[j] < buy_amount[j]:
                         buyarr[barr_count] = buy_amount[j] - buyset[j]
                         # print('%d , BUY : %0.0f' %(j, buyt))
@@ -160,9 +157,7 @@ def tuning():
                         print('%d , SELL : %0.0f' %(j, buyt))
                         sumc = buyset[j] - buyt
                         print('%d , NOW : %0.0f' %(j, sumc))
-                        print('CHECK J2: %d' %j)
-                        print('CHECK: %s' %currencies[j])
-                        # sell_market(currencies[j], buyt)
+                        sell_market(currencies[j], buyt)
                     elif buyset[j] < buy_amount[j]:
                         buyarr[barr_count] = buy_amount[j] - buyset[j]
                         # print('%d , BUY : %0.0f' %(j, buyt))

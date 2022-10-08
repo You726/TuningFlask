@@ -82,6 +82,8 @@ def start_tune():
         request_data = json.loads(request_data.decode('utf-8'))
         percents = request_data['percents']
         p_length = request_data['p_length']
+        print(percents)
+        print(p_length)
         depth = request_data['depth']
         tuning()
     return "";

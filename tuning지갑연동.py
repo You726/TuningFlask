@@ -103,6 +103,8 @@ def buy_market(ticker, price):
 
 def sell_market(ticker, price):
     volume = (price * 0.9995)/upbit.get_balance(ticker=ticker)
+    print(upbit.get_balance(ticker=ticker))
+    print(volume)
     upbit.sell_market_order(ticker="KRW-"+ticker, volume=volume)
 
 def reserve():
@@ -166,7 +168,7 @@ def tuning():
                         # print('%d , NOW : %0.0f' %(j, sumc))
                 break;
         reserve()
-        sleep(10)
+        break;
     return 0;
 
 if __name__ == '__main__':

@@ -69,7 +69,7 @@ def get_currencies():
     for i in balances:
         amount = 0;
         name = "KRW-"+i['currency']
-        print(pyupbit.get_current_price(name))
+        print(name)
         # amount = pyupbit.get_current_price(name) * upbit.get_balance(i['currency'])
         amount = upbit.get_amount(i['currency'])
         if(amount >= 1):

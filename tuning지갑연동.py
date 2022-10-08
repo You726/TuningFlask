@@ -70,9 +70,9 @@ def get_currencies():
         amount = 0;
         name = "KRW-"+i['currency']
         if i['currency'] != 'KRW' and i['currency'] != 'APENFT' and i['currency'] != 'XYM':
-            print(name)
+            # print(name)
             amount = pyupbit.get_current_price(name) * upbit.get_balance(i['currency'])
-            amount = upbit.get_amount(i['currency'])
+            # amount = upbit.get_amount(i['currency'])
             if(amount >= 1):
                 currencies.append(i['currency'])
                 strs.append(amount)

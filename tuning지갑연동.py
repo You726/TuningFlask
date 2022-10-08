@@ -170,6 +170,7 @@ def tuning():
                         # print('%d , NOW : %0.0f' %(j, sumc))
                 break;
         reserve()
+        sleep(10)
     return 0;
 
 if __name__ == '__main__':

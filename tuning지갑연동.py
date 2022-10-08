@@ -117,32 +117,33 @@ def reserve():
             break
 
 def tuning():
-    global buy_amount1, buy_amount2, upbit, buyarr, sumarr, barr_count, percents
-    buy_amount1 = [p_length]
-    buy_amount2 = [p_length]
+    global buy_amount, upbit, buyarr, sumarr, barr_count, percents
+    buy_amount = [p_length]
     percents = [p_length]
     buyarr = [p_length]
     sumarr = [p_length]
     barr_count = 0
     while(3):
+        print(buy_amount)
         for i in range(p_length):
-            buy_amount1[i] = buyset_sum * percents[i] / 100.0
-            print(buy_amount1[i])
+            print(buy_amount)
+            buy_amount[i] = buyset_sum * percents[i] / 100.0
+            print(buy_amount)
             print('having money : %0.0f' %buyset[i])
 
             #코인 가치가 제한 폭 만큼 보다 더 클 때
-            if buyset[i] > (buy_amount1[i] + (buy_amount1[i] * depth)) :
+            if buyset[i] > (buy_amount[i] + (buy_amount[i] * depth)) :
                 for j in range(p_length):
-                    buy_amount2[j] = buyset_sum * percents[j] / 100.0
-                    if buyset[j] > buy_amount2[j] :
-                        buyt = buyset[j] - buy_amount2[j]
+                    buy_amount[j] = buyset_sum * percents[j] / 100.0
+                    if buyset[j] > buy_amount[j] :
+                        buyt = buyset[j] - buy_amount[j]
                         print('%d , SELL : %0.0f' %(j, buyt))
                         sumc = buyset[j] - buyt
                         print('%d , NOW : %0.0f' %(j, sumc))
                         print('CHECK: %s' %currencies[j])
                         # sell_market(currencies[j], buyt)
-                    elif buyset[j] < buy_amount2[j]:
-                        buyarr[barr_count] = buy_amount2[j] - buyset[j]
+                    elif buyset[j] < buy_amount[j]:
+                        buyarr[barr_count] = buy_amount[j] - buyset[j]
                         # print('%d , BUY : %0.0f' %(j, buyt))
                         sumarr[barr_count] = buyset[j] + buyarr[barr_count]
                         # print('%d , NOW : %0.0f' %(j, sumc))
@@ -150,18 +151,18 @@ def tuning():
                 break;
 
             #코인 가치가 제한 폭 만큼 보다 더 작을 때
-            elif buyset[i] < (buy_amount1[i] - (buy_amount1[i] * depth)):
+            elif buyset[i] < (buy_amount[i] - (buy_amount[i] * depth)):
                 for j in range(p_length):
-                    buy_amount2[j] = buyset_sum * percents[j] / 100.0
-                    if buyset[j] > buy_amount2[j] :
-                        buyt = buyset[j] - buy_amount2[j]
+                    buy_amount[j] = buyset_sum * percents[j] / 100.0
+                    if buyset[j] > buy_amount[j] :
+                        buyt = buyset[j] - buy_amount[j]
                         print('%d , SELL : %0.0f' %(j, buyt))
                         sumc = buyset[j] - buyt
                         print('%d , NOW : %0.0f' %(j, sumc))
                         print('CHECK: %s' %currencies[j])
                         # sell_market(currencies[j], buyt)
-                    elif buyset[j] < buy_amount2[j]:
-                        buyarr[barr_count] = buy_amount2[j] - buyset[j]
+                    elif buyset[j] < buy_amount[j]:
+                        buyarr[barr_count] = buy_amount[j] - buyset[j]
                         # print('%d , BUY : %0.0f' %(j, buyt))
                         sumarr[barr_count] = buyset[j] + buyarr[barr_count]
                         # print('%d , NOW : %0.0f' %(j, sumc))

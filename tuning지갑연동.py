@@ -129,7 +129,7 @@ def tuning():
 
             #코인 가치가 제한 폭 만큼 보다 더 클 때
             if buyset[i] > (buy_amount[i] + (buy_amount[i] * depth)) :
-                for j in range(p_length):
+                for j in range(p_length-1):
                     buy_amount[j] = buyset_sum * percents[j] / 100.0
                     if buyset[j] > buy_amount[j] :
                         buyt = buyset[j] - buy_amount[j]
@@ -147,7 +147,7 @@ def tuning():
 
             #코인 가치가 제한 폭 만큼 보다 더 작을 때
             elif buyset[i] < (buy_amount[i] - (buy_amount[i] * depth)):
-                for j in range(p_length):
+                for j in range(p_length-1):
                     buy_amount[j] = buyset_sum * percents[j] / 100.0
                     if buyset[j] > buy_amount[j] :
                         buyt = buyset[j] - buy_amount[j]

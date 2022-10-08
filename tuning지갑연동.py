@@ -67,9 +67,10 @@ def get_currencies():
     coin_amount = []
 
     for i in balances:
-        amount = 0
-        amount = (pyupbit.get_current_price(i) * upbit.get_balance(i['currency']))
-        print(amount)
+        amount = 0;
+        print(i)
+        # amount = (pyupbit.get_current_price("KRW-"+i) * upbit.get_balance(i['currency']))
+        amount = upbit.get_amount(i['currency'])
         if(amount >= 1):
             currencies.append(i['currency'])
             strs.append(amount)

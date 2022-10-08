@@ -140,6 +140,8 @@ def tuning():
                         print('%d , SELL : %0.0f' %(j, buyt))
                         sumc = buyset[j] - buyt
                         print('%d , NOW : %0.0f' %(j, sumc))
+                        
+                        print('CHECK J1: %d' %[j])
                         print('CHECK: %s' %currencies[j])
                         # sell_market(currencies[j], buyt)
                     elif buyset[j] < buy_amount[j]:
@@ -159,6 +161,7 @@ def tuning():
                         print('%d , SELL : %0.0f' %(j, buyt))
                         sumc = buyset[j] - buyt
                         print('%d , NOW : %0.0f' %(j, sumc))
+                        print('CHECK J2: %d' %[j])
                         print('CHECK: %s' %currencies[j])
                         # sell_market(currencies[j], buyt)
                     elif buyset[j] < buy_amount[j]:

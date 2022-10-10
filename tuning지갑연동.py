@@ -133,9 +133,9 @@ def tuning():
     for i in range(p_length):
         buyset_sum += buyset[i]
     while(3):
-        print(buy_amount)
+        print(buyset_sum)
         for i in range(p_length):
-            print(buy_amount)
+            print(buyset_sum)
             buy_amount[i] = buyset_sum * percents[i] / 100.0
             print(buy_amount)
             print('having money : %0.0f' %buyset[i])

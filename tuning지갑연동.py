@@ -90,6 +90,7 @@ def start_tune():
         print(percents)
         print(p_length)
         depth = request_data['depth']
+        get_currencies()
         tuning()
     return "";
 

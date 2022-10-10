@@ -17,9 +17,9 @@ currencies = []
 coin_amount = []
 
 #튜닝에 필요한 변수들
-percents = [90, 10]
-buyset = [50000, 50000]
-p_length = 2
+percents = [0, 0]
+buyset = []
+p_length = 0
 
 buyset_sum = 0.0
 depth = 0.15
@@ -72,6 +72,7 @@ def get_currencies():
         if i['currency'] != 'KRW' and i['currency'] != 'APENFT' and i['currency'] != 'XYM':
             # print(name)
             amount = pyupbit.get_current_price(name) * upbit.get_balance(i['currency'])
+            buyset.append(pyupbit.get_current_price(name) * upbit.get_balance(i['currency']))
             # amount = upbit.get_amount(i['currency'])
             if(amount >= 1):
                 currencies.append(i['currency'])

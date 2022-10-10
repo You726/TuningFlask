@@ -21,7 +21,7 @@ percents = [90, 10]
 buyset = [50000, 50000]
 p_length = 2
 
-buyset_sum = 100000.0
+buyset_sum = 0.0
 depth = 0.15
 
 server_url = "https://api.upbit.com";
@@ -124,11 +124,13 @@ def reserve():
             break
 
 def tuning():
-    global buy_amount, upbit, buyarr, sumarr, barr_count, percents
+    global buy_amount, upbit, buyarr, sumarr, barr_count, percents, buyset_sum
     buy_amount = [0] * p_length
     buyarr = [0] * p_length
     sumarr = [0] * p_length
     barr_count = 0
+    for i in range(p_length):
+        buyset_sum += buyset[i]
     while(3):
         print(buy_amount)
         for i in range(p_length):

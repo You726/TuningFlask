@@ -72,9 +72,9 @@ def get_currencies():
         if i['currency'] != 'KRW' and i['currency'] != 'APENFT' and i['currency'] != 'XYM':
             # print(name)
             amount = pyupbit.get_current_price(name) * upbit.get_balance(i['currency'])
-            buyset.append(pyupbit.get_current_price(name) * upbit.get_balance(i['currency']))
             # amount = upbit.get_amount(i['currency'])
             if(amount >= 1):
+                buyset.append(pyupbit.get_current_price(name) * upbit.get_balance(i['currency']))
                 currencies.append(i['currency'])
                 strs.append(amount)
                 coin_amount.append(upbit.get_balance(i['currency']))

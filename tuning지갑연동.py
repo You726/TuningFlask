@@ -104,7 +104,7 @@ def get_balance(ticker):
     return 0
 
 def buy_market(ticker, price):
-    upbit.buy_market_order("KRW-"+ticker, price*0.995)
+    upbit.buy_market_order("KRW-"+ticker, price*0.997)
 
 def sell_market(ticker, price):
     volume = price/pyupbit.get_current_price("KRW-"+ticker)*0.9995
@@ -130,6 +130,7 @@ def tuning():
     buyarr = [0] * p_length
     sumarr = [0] * p_length
     barr_count = 0
+    buyset_sum = 0
     for i in range(p_length):
         buyset_sum += buyset[i]
     while(3):

@@ -114,7 +114,7 @@ def sell_market(ticker, price):
     upbit.sell_market_order("KRW-"+ticker, volume)
 
 def reserve():
-    global buyarr, sumarr, barr_count
+    global buyarr, sumarr
 
     for i in range(barr_count):
         if buyarr[i] != None and sumarr[i] != None:

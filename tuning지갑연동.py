@@ -79,7 +79,7 @@ def get_currencies():
             if(amount >= 1):
                 currencies.append(i['currency'])
                 strs.append(amount)
-                cur_dict = {currencies, strs}
+                cur_dict[i['currency']] = amount
                 print(cur_dict)
                 coin_amount.append(upbit.get_balance(i['currency']))
 

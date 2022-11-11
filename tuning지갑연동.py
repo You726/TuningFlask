@@ -131,7 +131,7 @@ def tuning():
     sumarr = [0] * p_length
     barr_count = 0
     buyset_sum = 0
-    strs.sort(reverse=True)
+    # strs.sort(reverse=True)
     for i in range(p_length):
         buyset_sum += strs[i]
     while(3):

@@ -61,7 +61,7 @@ def b():
     return "";
 
 def get_currencies():  
-    global currencies, strs, coin_amount
+    global currencies, strs, coin_amount, buyset
     currencies = []
     strs = []
     coin_amount = []
@@ -74,7 +74,7 @@ def get_currencies():
             amount = pyupbit.get_current_price(name) * upbit.get_balance(i['currency'])
             # amount = upbit.get_amount(i['currency'])
             if(amount >= 1):
-                buyset.append(pyupbit.get_current_price(name) * upbit.get_balance(i['currency']))
+                buyset[i] = pyupbit.get_current_price(name) * upbit.get_balance(i['currency'])
                 currencies.append(i['currency'])
                 strs.append(amount)
                 coin_amount.append(upbit.get_balance(i['currency']))
@@ -105,10 +105,10 @@ def get_balance(ticker):
     return 0
 
 def buy_market(ticker, price):
-    upbit.buy_market_order("KRW-"+ticker, (price*0.9995)-100)
+    upbit.buy_market_order("KRW-"+ticker, (price*0.9995))
 
 def sell_market(ticker, price):
-    volume = (price/pyupbit.get_current_price("KRW-"+ticker)*0.9995)-100
+    volume = (price/pyupbit.get_current_price("KRW-"+ticker)*0.9995)
     print(pyupbit.get_current_price("KRW-"+ticker))
     print(volume)
     upbit.sell_market_order("KRW-"+ticker, volume)
@@ -130,16 +130,12 @@ def tuning():
     buy_amount = [0] * p_length
     buyarr = [0] * p_length
     sumarr = [0] * p_length
-    print(buy_amount)
-    print('ㄴ TEST')
     barr_count = 0
     buyset_sum = 0
     for i in range(p_length):
         buyset_sum += buyset[i]
     while(3):
-        print(buyset_sum)
         for i in range(p_length):
-            print(buyset_sum)
             buy_amount[i] = buyset_sum * percents[i] / 100.0
             print(buy_amount)
             print('having money : %0.0f' %buyset[i])

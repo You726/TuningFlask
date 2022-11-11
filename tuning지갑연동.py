@@ -65,6 +65,7 @@ def get_currencies():
     currencies = []
     strs = []
     coin_amount = []
+    buyset = [0] * p_length
 
     for i in balances:
         amount = 0;

@@ -73,8 +73,8 @@ def get_currencies():
             # print(name)
             amount = pyupbit.get_current_price(name) * upbit.get_balance(i['currency'])
             # amount = upbit.get_amount(i['currency'])
-            if(amount >= 2):
-                buyset.append(pyupbit.get_current_price(name) * upbit.get_balance(i['currency']))
+            if(amount >= 1):
+                buyset.append(amount)
                 currencies.append(i['currency'])
                 strs.append(amount)
                 coin_amount.append(upbit.get_balance(i['currency']))

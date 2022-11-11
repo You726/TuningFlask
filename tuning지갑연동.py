@@ -18,6 +18,7 @@ coin_amount = []
 
 #튜닝에 필요한 변수들
 percents = [0, 0]
+buyset = []
 p_length = 0
 
 buyset_sum = 0.0
@@ -64,7 +65,6 @@ def get_currencies():
     currencies = []
     strs = []
     coin_amount = []
-    buyset = [0] * p_length
 
     for i in balances:
         amount = 0;
@@ -74,7 +74,7 @@ def get_currencies():
             amount = pyupbit.get_current_price(name) * upbit.get_balance(i['currency'])
             # amount = upbit.get_amount(i['currency'])
             if(amount >= 1):
-                buyset[i] = pyupbit.get_current_price(name) * upbit.get_balance(i['currency'])
+                buyset.append(pyupbit.get_current_price(name) * upbit.get_balance(i['currency']))
                 currencies.append(i['currency'])
                 strs.append(amount)
                 coin_amount.append(upbit.get_balance(i['currency']))

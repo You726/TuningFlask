@@ -141,6 +141,8 @@ def tuning():
             print(buy_amount)
             print('SIE')
             print(buyset)
+            print(currencies)
+            print(strs)
             print('having money : %0.0f' %buyset[i])
 
             #코인 가치가 제한 폭 만큼 보다 더 클 때

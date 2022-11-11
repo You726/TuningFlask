@@ -61,13 +61,16 @@ def b():
     return "";
 
 def get_currencies():  
-    global currencies, strs, coin_amount, buyset
+    global currencies, strs, coin_amount, cur_dict
     currencies = []
     strs = []
     coin_amount = []
-
+    cur_dict = {}
     for i in balances:
-        amount = 0;
+        global temp, amount2
+        amount = 0
+        amount2 = 0
+        temp = 0
         name = "KRW-"+i['currency']
         if i['currency'] != 'KRW' and i['currency'] != 'APENFT' and i['currency'] != 'XYM' and i['currency'] != 'ETHF' and i['currency'] != 'ETHW':
             # print(name)
@@ -76,6 +79,8 @@ def get_currencies():
             if(amount >= 1):
                 currencies.append(i['currency'])
                 strs.append(amount)
+                cur_dict = {currencies, strs}
+                print(cur_dict)
                 coin_amount.append(upbit.get_balance(i['currency']))
 
 @app1.route('/tuning', methods=['POST', 'GET'])

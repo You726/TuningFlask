@@ -74,7 +74,6 @@ def get_currencies():
             amount = pyupbit.get_current_price(name) * upbit.get_balance(i['currency'])
             # amount = upbit.get_amount(i['currency'])
             if(amount >= 1):
-                buyset.append(amount)
                 currencies.append(i['currency'])
                 strs.append(amount)
                 coin_amount.append(upbit.get_balance(i['currency']))
@@ -132,9 +131,9 @@ def tuning():
     sumarr = [0] * p_length
     barr_count = 0
     buyset_sum = 0
-    buyset.sort(reverse=True)
+    strs.sort(reverse=True)
     for i in range(p_length):
-        buyset_sum += buyset[i]
+        buyset_sum += strs[i]
     while(3):
         for i in range(p_length):
             buy_amount[i] = buyset_sum * percents[i] / 100.0
@@ -143,40 +142,40 @@ def tuning():
             print(buyset)
             print(currencies)
             print(strs)
-            print('having money : %0.0f' %buyset[i])
+            print('having money : %0.0f' %strs[i])
 
             #코인 가치가 제한 폭 만큼 보다 더 클 때
-            if buyset[i] > (buy_amount[i] + (buy_amount[i] * depth)) :
+            if strs[i] > (buy_amount[i] + (buy_amount[i] * depth)) :
                 for j in range(p_length):
                     buy_amount[j] = buyset_sum * percents[j] / 100.0
-                    if buyset[j] > buy_amount[j] :
-                        buyt = buyset[j] - buy_amount[j]
+                    if strs[j] > buy_amount[j] :
+                        buyt = strs[j] - buy_amount[j]
                         print('%d , SELL : %0.0f' %(j, buyt))
-                        sumc = buyset[j] - buyt
+                        sumc = strs[j] - buyt
                         print('%d , NOW : %0.0f' %(j, sumc))
                         sell_market(currencies[j], buyt)
-                    elif buyset[j] < buy_amount[j]:
-                        buyarr[barr_count] = buy_amount[j] - buyset[j]
+                    elif strs[j] < buy_amount[j]:
+                        buyarr[barr_count] = buy_amount[j] - strs[j]
                         # print('%d , BUY : %0.0f' %(j, buyt))
-                        sumarr[barr_count] = buyset[j] + buyarr[barr_count]
+                        sumarr[barr_count] = strs[j] + buyarr[barr_count]
                         # print('%d , NOW : %0.0f' %(j, sumc))
                     barr_count += 1
                 break;
 
             #코인 가치가 제한 폭 만큼 보다 더 작을 때
-            elif buyset[i] < (buy_amount[i] - (buy_amount[i] * depth)):
+            elif strs[i] < (buy_amount[i] - (buy_amount[i] * depth)):
                 for j in range(p_length):
                     buy_amount[j] = buyset_sum * percents[j] / 100.0
-                    if buyset[j] > buy_amount[j] :
-                        buyt = buyset[j] - buy_amount[j]
+                    if strs[j] > buy_amount[j] :
+                        buyt = strs[j] - buy_amount[j]
                         print('%d , SELL : %0.0f' %(j, buyt))
-                        sumc = buyset[j] - buyt
+                        sumc = strs[j] - buyt
                         print('%d , NOW : %0.0f' %(j, sumc))
                         sell_market(currencies[j], buyt)
-                    elif buyset[j] < buy_amount[j]:
-                        buyarr[barr_count] = buy_amount[j] - buyset[j]
+                    elif strs[j] < buy_amount[j]:
+                        buyarr[barr_count] = buy_amount[j] - strs[j]
                         # print('%d , BUY : %0.0f' %(j, buyt))
-                        sumarr[barr_count] = buyset[j] + buyarr[barr_count]
+                        sumarr[barr_count] = strs[j] + buyarr[barr_count]
                         # print('%d , NOW : %0.0f' %(j, sumc))
                 break;
         reserve()

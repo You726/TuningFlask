@@ -105,10 +105,10 @@ def get_balance(ticker):
     return 0
 
 def buy_market(ticker, price):
-    upbit.buy_market_order("KRW-"+ticker, (price*0.9995)-1000)
+    upbit.buy_market_order("KRW-"+ticker, (price*0.9995)-100)
 
 def sell_market(ticker, price):
-    volume = (price/pyupbit.get_current_price("KRW-"+ticker)*0.9995)-1000
+    volume = (price/pyupbit.get_current_price("KRW-"+ticker)*0.9995)-100
     print(pyupbit.get_current_price("KRW-"+ticker))
     print(volume)
     upbit.sell_market_order("KRW-"+ticker, volume)

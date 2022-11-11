@@ -80,8 +80,10 @@ def get_currencies():
                 currencies.append(i['currency'])
                 strs.append(amount)
                 cur_dict[i['currency']] = amount
-                print(cur_dict.items)
-                
+                print(cur_dict.keys)
+                print(cur_dict.values)
+                # 여기까지 작업했는데, 작업 내용은 딕셔너리에 키, 값으로 내림차순 정렬해서 [coinname, amount]로 넣어둔 상태이고
+                # 이걸 이용해서 currencies를 딕셔너리의 키로 대체하고 strs를 딕셔너리의 값으로 대체해야한다. 
                 coin_amount.append(upbit.get_balance(i['currency']))
 
 @app1.route('/tuning', methods=['POST', 'GET'])

@@ -18,7 +18,6 @@ coin_amount = []
 
 #튜닝에 필요한 변수들
 percents = [0, 0]
-buyset = []
 p_length = 0
 
 buyset_sum = 0.0

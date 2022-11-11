@@ -80,7 +80,8 @@ def get_currencies():
                 currencies.append(i['currency'])
                 strs.append(amount)
                 cur_dict[i['currency']] = amount
-                print(cur_dict)
+                print(cur_dict.items)
+                
                 coin_amount.append(upbit.get_balance(i['currency']))
 
 @app1.route('/tuning', methods=['POST', 'GET'])
@@ -137,6 +138,8 @@ def tuning():
     barr_count = 0
     buyset_sum = 0
     # strs.sort(reverse=True)
+    sorted(cur_dict.items(), key=lambda x: x[1], reverse=True)
+    print(cur_dict)
     for i in range(p_length):
         buyset_sum += strs[i]
     while(3):

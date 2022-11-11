@@ -138,6 +138,8 @@ def tuning():
         for i in range(p_length):
             buy_amount[i] = buyset_sum * percents[i] / 100.0
             print(buy_amount)
+            print('SIE')
+            print(buyset)
             print('having money : %0.0f' %buyset[i])
 
             #코인 가치가 제한 폭 만큼 보다 더 클 때

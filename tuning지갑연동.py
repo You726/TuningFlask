@@ -73,7 +73,7 @@ def get_currencies():
             # print(name)
             amount = pyupbit.get_current_price(name) * upbit.get_balance(i['currency'])
             # amount = upbit.get_amount(i['currency'])
-            if(amount >= 1):
+            if(amount >= 2):
                 buyset.append(pyupbit.get_current_price(name) * upbit.get_balance(i['currency']))
                 currencies.append(i['currency'])
                 strs.append(amount)
@@ -132,6 +132,7 @@ def tuning():
     sumarr = [0] * p_length
     barr_count = 0
     buyset_sum = 0
+    buyset.sort(reverse=True)
     for i in range(p_length):
         buyset_sum += buyset[i]
     while(3):

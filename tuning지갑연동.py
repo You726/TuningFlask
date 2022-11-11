@@ -130,7 +130,8 @@ def tuning():
     buy_amount = [0] * p_length
     buyarr = [0] * p_length
     sumarr = [0] * p_length
-    print(buy_amount+"TEST")
+    print(buy_amount)
+    print('ㄴ TEST')
     barr_count = 0
     buyset_sum = 0
     for i in range(p_length):

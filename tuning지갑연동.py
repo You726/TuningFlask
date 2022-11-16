@@ -120,7 +120,6 @@ def sell_market(ticker, price):
 
 def reserve():
     global buyarr, sumarr
-
     for i in range(barr_count):
         if buyarr[i] != None and sumarr[i] != None:
             print('%d , BUY : %0.0f' %(i, buyarr[i]))

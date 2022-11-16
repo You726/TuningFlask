@@ -80,8 +80,8 @@ def get_currencies():
                 currencies.append(i['currency'])
                 strs.append(amount)
                 cur_dict[i['currency']] = amount
-                print(cur_dict.keys)
-                print(cur_dict.values)
+                print(cur_dict.keys())
+                print(cur_dict.values())
                 # 여기까지 작업했는데, 작업 내용은 딕셔너리에 키, 값으로 내림차순 정렬해서 [coinname, amount]로 넣어둔 상태이고
                 # 이걸 이용해서 currencies를 딕셔너리의 키로 대체하고 strs를 딕셔너리의 값으로 대체해야한다. 
                 coin_amount.append(upbit.get_balance(i['currency']))
@@ -133,7 +133,7 @@ def reserve():
             break
 
 def tuning():
-    global buy_amount, upbit, buyarr, sumarr, barr_count, percents, buyset_sum
+    global buy_amount, upbit, buyarr, sumarr, barr_count, percents, buyset_sum, values_list, key_list
     buy_amount = [0] * p_length
     buyarr = [0] * p_length
     sumarr = [0] * p_length
@@ -141,9 +141,11 @@ def tuning():
     buyset_sum = 0
     # strs.sort(reverse=True)
     sorted(cur_dict.items(), key=lambda x: x[1], reverse=True)
+    values_list = list(cur_dict.values())
+    key_list = list(cur_dict.keys())
     print(cur_dict)
     for i in range(p_length):
-        buyset_sum += strs[i]
+        buyset_sum += values_list[i]
     while(3):
         for i in range(p_length):
             buy_amount[i] = buyset_sum * percents[i] / 100.0
@@ -152,40 +154,40 @@ def tuning():
             print(buyset)
             print(currencies)
             print(strs)
-            print('having money : %0.0f' %strs[i])
+            print('having money : %0.0f' %values_list[i])
 
             #코인 가치가 제한 폭 만큼 보다 더 클 때
-            if strs[i] > (buy_amount[i] + (buy_amount[i] * depth)) :
+            if values_list[i] > (buy_amount[i] + (buy_amount[i] * depth)) :
                 for j in range(p_length):
                     buy_amount[j] = buyset_sum * percents[j] / 100.0
-                    if strs[j] > buy_amount[j] :
-                        buyt = strs[j] - buy_amount[j]
+                    if values_list[j] > buy_amount[j] :
+                        buyt = values_list[j] - buy_amount[j]
                         print('%d , SELL : %0.0f' %(j, buyt))
-                        sumc = strs[j] - buyt
+                        sumc = values_list[j] - buyt
                         print('%d , NOW : %0.0f' %(j, sumc))
-                        sell_market(currencies[j], buyt)
-                    elif strs[j] < buy_amount[j]:
-                        buyarr[barr_count] = buy_amount[j] - strs[j]
+                        sell_market(key_list[j], buyt)
+                    elif values_list[j] < buy_amount[j]:
+                        buyarr[barr_count] = buy_amount[j] - values_list[j]
                         # print('%d , BUY : %0.0f' %(j, buyt))
-                        sumarr[barr_count] = strs[j] + buyarr[barr_count]
+                        sumarr[barr_count] = values_list[j] + buyarr[barr_count]
                         # print('%d , NOW : %0.0f' %(j, sumc))
                     barr_count += 1
                 break;
 
             #코인 가치가 제한 폭 만큼 보다 더 작을 때
-            elif strs[i] < (buy_amount[i] - (buy_amount[i] * depth)):
+            elif values_list[i] < (buy_amount[i] - (buy_amount[i] * depth)):
                 for j in range(p_length):
                     buy_amount[j] = buyset_sum * percents[j] / 100.0
-                    if strs[j] > buy_amount[j] :
-                        buyt = strs[j] - buy_amount[j]
+                    if values_list[j] > buy_amount[j] :
+                        buyt = values_list[j] - buy_amount[j]
                         print('%d , SELL : %0.0f' %(j, buyt))
-                        sumc = strs[j] - buyt
+                        sumc = values_list[j] - buyt
                         print('%d , NOW : %0.0f' %(j, sumc))
-                        sell_market(currencies[j], buyt)
-                    elif strs[j] < buy_amount[j]:
-                        buyarr[barr_count] = buy_amount[j] - strs[j]
+                        sell_market(key_list[j], buyt)
+                    elif values_list[j] < buy_amount[j]:
+                        buyarr[barr_count] = buy_amount[j] - values_list[j]
                         # print('%d , BUY : %0.0f' %(j, buyt))
-                        sumarr[barr_count] = strs[j] + buyarr[barr_count]
+                        sumarr[barr_count] = values_list[j] + buyarr[barr_count]
                         # print('%d , NOW : %0.0f' %(j, sumc))
                 break;
         reserve()

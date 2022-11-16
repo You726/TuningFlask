@@ -80,8 +80,6 @@ def get_currencies():
                 currencies.append(i['currency'])
                 strs.append(amount)
                 cur_dict[i['currency']] = amount
-                print(cur_dict.keys())
-                print(cur_dict.values())
                 # 여기까지 작업했는데, 작업 내용은 딕셔너리에 키, 값으로 내림차순 정렬해서 [coinname, amount]로 넣어둔 상태이고
                 # 이걸 이용해서 currencies를 딕셔너리의 키로 대체하고 strs를 딕셔너리의 값으로 대체해야한다. 
                 coin_amount.append(upbit.get_balance(i['currency']))
@@ -112,7 +110,7 @@ def get_balance(ticker):
     return 0
 
 def buy_market(ticker, price):
-    upbit.buy_market_order("KRW-"+ticker, (price*0.9995))
+    upbit.buy_market_order("KRW-"+ticker, (price*0.9995)-1000)
 
 def sell_market(ticker, price):
     volume = (price/pyupbit.get_current_price("KRW-"+ticker)*0.9995)
@@ -149,11 +147,6 @@ def tuning():
     while(3):
         for i in range(p_length):
             buy_amount[i] = buyset_sum * percents[i] / 100.0
-            print(buy_amount)
-            print('SIE')
-            print(buyset)
-            print(currencies)
-            print(strs)
             print('having money : %0.0f' %values_list[i])
 
             #코인 가치가 제한 폭 만큼 보다 더 클 때
